@@ -1,0 +1,48 @@
+{
+  "name": "blogappreact",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.7.5",
+    "@testing-library/jest-dom": "*",
+    "@testing-library/react": "*",
+    "@testing-library/user-event": "*",
+    "bootstrap": "*",
+    "graphql": "^16.6.0",
+    "http-proxy-middleware": "^2.0.6",
+    "react": "*",
+    "react-bootstrap": "*",
+    "react-dom": "*",
+    "react-hook-form": "^7.43.0",
+    "react-router": "*",
+    "react-router-dom": "*",
+    "react-scripts": "*",
+    "web-vitals": "*",
+    "yui-lint": "^0.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

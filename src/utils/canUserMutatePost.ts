@@ -1,7 +1,5 @@
 import { Context } from "..";
 
-
-
 interface CaUserMutatePostParams {
   userId: number;
   postId: number;

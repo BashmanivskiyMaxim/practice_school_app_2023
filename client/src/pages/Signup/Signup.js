@@ -5,10 +5,13 @@ import "../styles.css";
 import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 import { SIGNUP } from "../../Mutations/Mutations";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   // eslint-disable-next-line no-unused-vars
   const [signup, { data, loading }] = useMutation(SIGNUP);
+
+  const history = useNavigate();
 
   const {
     register,
@@ -45,6 +48,8 @@ export default function Signup() {
       }
       if (data.signup.token) {
         localStorage.setItem("token", data.signup.token);
+        localStorage.setItem("UserId", data.signup.userId);
+        history("/profile/" + data.signup.userId);
       }
     }
   }, [data]);

@@ -87,12 +87,13 @@ export default function Post({
   const formatedDate = new Date(Number(date)).toLocaleString("ru", options);
 
 
+
   return (
     <Col style={{ paddingBottom: "20px" }}>
       <Card style={published === false ? { backgroundColor: "burlywood" } : {}}>
         <Card.Header>
           {`${formatedDate}`.split(" ").splice(0, 3).join(" ")}{" "}
-          <a onClick={() => history("/profile" + "/" + user.id)}>{user.name}</a>
+          <a style={{color: "inherit"}} href="" onClick={() => history("/profile" + "/" + user.id)}>{user.name}</a>
           {isMyProfile === true && published === false && (
             <ul className="wrapper">
               <li className="icon success">

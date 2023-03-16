@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createContext} from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -16,7 +16,9 @@ const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 });
 
-const authLink = setContext((_, { headers }) => {
+
+
+export const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
   return {
     headers: {

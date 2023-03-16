@@ -10,15 +10,15 @@ import NavBar from "./components/Navbar";
 function App() {
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className="App">
-      <Routes>
-        <Route strict exact path="/posts" element={<Posts />} />
-        <Route strict exact path="/signup" element={<Signup />} />
-        <Route strict exact path="/signin" element={<Signin />} />
-        <Route strict exact path="/profile/:id" element={<Profile />} />
-      </Routes>
-    </div>
+        <Routes>
+          <Route strict exact path="/" element={<Posts />} />
+          <Route strict exact path="/signup" element={<Signup />} />
+          <Route strict exact path="/signin" element={<Signin />} />
+          <Route strict exact path="/profile/:id" element={<Profile />} />
+        </Routes>
+      </div>
     </div>
   );
 }

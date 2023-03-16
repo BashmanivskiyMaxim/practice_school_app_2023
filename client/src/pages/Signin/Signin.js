@@ -1,11 +1,12 @@
 import { useMutation } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import "../styles.css";
 import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 import { SIGNIN } from "../../Mutations/Mutations";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../index.js";
 
 export default function Signin() {
   // eslint-disable-next-line no-unused-vars
@@ -29,12 +30,10 @@ export default function Signin() {
       email: data.email,
       password: data.password,
     });
-    console.log(data)
+    console.log(data);
     signin({
       variables,
     });
-
-
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -47,8 +46,8 @@ export default function Signin() {
       }
       if (dataSignIn.signin.token) {
         localStorage.setItem("token", dataSignIn.signin.token);
-        localStorage.setItem("UserId", dataSignIn.signin.userId)
-        history("/profile/" +  dataSignIn.signin.userId)
+        localStorage.setItem("UserId", dataSignIn.signin.userId);
+        history("/profile/" + dataSignIn.signin.userId);
       }
     }
   }, [dataSignIn]);
@@ -70,7 +69,11 @@ export default function Signin() {
           })}
           aria-invalid={errors.email ? "true" : "false"}
         />
-        {errors.email && <p className="p-form" role="alert">{errors.email?.message}</p>}
+        {errors.email && (
+          <p className="p-form" role="alert">
+            {errors.email?.message}
+          </p>
+        )}
         <input
           placeholder={"Пароль"}
           {...register("password", {
@@ -81,12 +84,18 @@ export default function Signin() {
             },
           })}
         />
-        {errors.password && <p className="p-form" role="alert">{errors.password?.message}</p>}
+        {errors.password && (
+          <p className="p-form" role="alert">
+            {errors.password?.message}
+          </p>
+        )}
         <Button variant="primary" type="submit">
           Увійти
         </Button>
       </form>
-      <NavLink style={{"marginLeft": "350px"}} to={"/signup"}>Реєстрація</NavLink>
+      <NavLink style={{ marginLeft: "350px" }} to={"/signup"}>
+        Реєстрація
+      </NavLink>
     </div>
   );
 }

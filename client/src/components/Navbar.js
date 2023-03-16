@@ -1,18 +1,19 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as User } from "./user.svg";
-import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { useNavigate } from "react-router-dom";
+import { client } from "..";
 
 const NavBar = () => {
   const history = useNavigate();
   const authToken = localStorage.getItem("token");
+  
 
   const logOut = () => {
     localStorage.removeItem("token");
+    client.refetchQueries()
   };
 
   return (
@@ -25,44 +26,52 @@ const NavBar = () => {
             fontSize: "28px",
             fontFamily: "Courier New",
           }}
-          to={""}
+          to={"/"}
         >
           SCHOOL_SHELTER
         </NavLink>
 
         {authToken ? (
-
-         <div>
+          <div>
             <NavLink
-          style={{
-            textDecoration: "none",
-            color: "black",
-            fontSize: "28px",
-            fontFamily: "Courier New",
-            marginRight: "5px"
-          }}
-          to={""}
-        ><User/></NavLink>
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontSize: "28px",
+                fontFamily: "Courier New",
+                marginRight: "5px",
+              }}
+              to={"/profile" + "/" + localStorage.getItem("UserId")}
+            >
+              <User />
+            </NavLink>
             <NavLink
-          style={{
-            textDecoration: "none",
-            color: "black",
-            fontSize: "28px",
-            fontFamily: "Courier New",
-          }}
-          to={""}
-        >Вийти</NavLink>
-         </div>
-      
+              onClick={() => logOut()}
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontSize: "28px",
+                fontFamily: "Courier New",
+              }}
+              to={"/"}
+            >
+              Вийти
+            </NavLink>
+          </div>
         ) : (
-          <Nav className="ml-auto" style={{ color: "white" }}>
-            <Button
-              variant={"outline-light"}
-              onClick={() => history("/signin")}
+          <div>
+            <NavLink
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontSize: "28px",
+                fontFamily: "Courier New",
+              }}
+              to={"/signin"}
             >
               Увійти
-            </Button>
-          </Nav>
+            </NavLink>
+          </div>
         )}
       </Container>
     </Navbar>

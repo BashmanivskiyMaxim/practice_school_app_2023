@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Post from "../../components/Post/Post";
 import { useQuery, gql } from "@apollo/client";
 import { Button } from "react-bootstrap";
 import LikesButton from "../../components/Post/Like.js";
+import { client } from "../..";
 
 const GET_POSTS = gql`
   query GetPostsPag($skip: Int!, $take: Int!) {
@@ -29,7 +30,10 @@ const GET_POSTS_COUNT = gql`
 
 export default function Posts() {
   const [skip, setSkip] = useState(1);
-  const authToken = localStorage.getItem("token");
+  let authToken = localStorage.getItem("token");
+
+
+
 
   const {
     // eslint-disable-next-line no-unused-vars
@@ -45,13 +49,12 @@ export default function Posts() {
     },
   });
 
+
   if (error) return <div>Error Page</div>;
 
   if (loading) return <div>Spinner...</div>;
 
   const { posts } = data;
-
-  
 
   const disNext = Math.round(CountofPosts.getPosts.value / 8);
   return (
@@ -64,8 +67,8 @@ export default function Posts() {
       {posts.map((post) => {
         const props = {
           postId: post.id,
-          skip: skip
-        } 
+          skip: skip,
+        };
         return (
           <Post
             key={post.id}
@@ -74,7 +77,7 @@ export default function Posts() {
             date={post.createdAt}
             id={post.id}
             user={post.user}
-            likebutton={authToken && <LikesButton {...props}/>}
+            likebutton={authToken && <LikesButton {...props} />}
           />
         );
       })}
